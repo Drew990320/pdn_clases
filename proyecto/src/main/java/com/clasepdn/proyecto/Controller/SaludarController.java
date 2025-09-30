@@ -1,14 +1,15 @@
 package com.clasepdn.proyecto.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import java.time.LocalTime;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/saludar")
 public class SaludarController {
+
+    // ------------------ ENDPOINTS ORIGINALES ------------------
 
     @GetMapping
     public String saludar() {
@@ -34,5 +35,19 @@ public class SaludarController {
     public String despedirUsuario(@PathVariable String nombre) {
         return "¡Adiós " + nombre + "! Esperamos verte pronto";
     }
-}
+
+    // ------------------ NUEVAS FUNCIONALIDADES ------------------
+
+    /**
+     * Saludo dinámico según la hora del día.
+     * Ejemplo: GET /api/saludar/dinamico?nombre=Laura
+     */
+    @GetMapping("/dinamico")
+    public String saludoDinamico(@RequestParam(defaultValue = "Amigo") String nombre) {
+        int hora = LocalTime.now().getHour();
+        String saludo;
+
+        if (hora < 12) {
+            saludo =
+
 
