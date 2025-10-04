@@ -4,8 +4,8 @@ INSERT INTO roles (name) VALUES ('CUSTOMER');
 INSERT INTO permissions (name) VALUES('READ_ALL_PRODUCTS');
 INSERT INTO permissions (name) VALUES('SAVE_ONE_PRODUCT');
 
-INSERT INTO users (username, password, name, role_id) VALUES ('slazaro', '$2a$10$02PPGOr4nr8ahERpvFUwhuSsR0kieo.NM3LYMp/j2VznTBUaKejW6', 'Santiago Lázaro', 1);
-INSERT INTO users (username, password, name, role_id) VALUES ('kvergel', '$2a$10$IKQFmEGVXXPTcppraNkQfepFh29GmWpD69sWnLruoYGlNpW4h6FLO', 'Kevin Vergel', 2);
+INSERT INTO users (username, password, name, role_id) VALUES ('David', '$2a$10$02PPGOr4nr8ahERpvFUwhuSsR0kieo.NM3LYMp/j2VznTBUaKejW6', 'Santiago Lázaro', 1);
+INSERT INTO users (username, password, name, role_id) VALUES ('Rincon', '$2a$10$IKQFmEGVXXPTcppraNkQfepFh29GmWpD69sWnLruoYGlNpW4h6FLO', 'Kevin Vergel', 2);
 
 INSERT INTO roles_permissions (role_id, permission_id) VALUES (1, 1);
 INSERT INTO roles_permissions (role_id, permission_id) VALUES (1, 2);
