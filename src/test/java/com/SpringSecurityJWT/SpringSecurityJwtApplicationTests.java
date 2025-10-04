@@ -1,10 +1,10 @@
-package com.parcial.pdn_clases_parcial;
+package com.SpringSecurityJWT;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PdnClasesParcialApplicationTests {
+class SpringSecurityJwtApplicationTests {
 
 	@Test
 	void contextLoads() {

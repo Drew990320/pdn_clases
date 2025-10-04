@@ -1,0 +1,29 @@
+###AUTHENTICATE
+POST   localhost:8080/auth/authenticate
+Content-Type: application/json
+
+{
+  "username": "slazaro",
+  "password": "60415654"
+}
+
+###AUTH-PUBLIC-ACCESS
+GET localhost:8080/auth/public-access
+
+###SAVE-TOKEN
+#@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjp7ImlkIjoxLCJuYW1lIjoiQURNSU5JU1RSQVRPUiIsInBlcm1pc3Npb25zIjpbeyJpZCI6MiwibmFtZSI6IlNBVkVfT05FX1BST0RVQ1QifSx7ImlkIjoxLCJuYW1lIjoiUkVBRF9BTExfUFJPRFVDVFMifV19LCJuYW1lIjoiU2FudGlhZ28gTMOhemFybyIsInBlcm1pc3Npb24iOlt7ImF1dGhvcml0eSI6IlNBVkVfT05FX1BST0RVQ1QifSx7ImF1dGhvcml0eSI6IlJFQURfQUxMX1BST0RVQ1RTIn0seyJhdXRob3JpdHkiOiJST0xFX0FETUlOSVNUUkFUT1IifV0sInN1YiI6InNsYXphcm8iLCJpYXQiOjE3NDQ4MzgxMDcsImV4cCI6MTc0NDgzOTkwN30.GO84EPLm1uyU3LOxmfaUFr-6M_HtwI6ZtuF51jCrRUs
+@token = eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU5JU1RSQVRPUiIsInBlcm1pc3Npb25zIjpbIlJFQURfQUxMX1BST0RVQ1RTIiwiU0FWRV9PTkVfUFJPRFVDVCIsIlJPTEVfQURNSU5JU1RSQVRPUiJdLCJzdWIiOiJzbGF6YXJvIiwiaWF0IjoxNzQ0ODQwMDU5LCJleHAiOjE3NDQ4NDE4NTl9.CEVeAXsrFwRzEjtK52I4yW5LliG8X8D0lYGKvxSUebk
+
+###PRODUCTS
+GET localhost:8080/products
+Authorization: Bearer {{token}}
+
+###PRODUCT-CREATE
+POST   localhost:8080/products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Salami",
+  "price": "100.0"
+}
