@@ -46,16 +46,24 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Permitir orígenes específicos del frontend
-        configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:5173",
-                "http://localhost:3000",
-                "http://127.0.0.1:5173",
-                "http://127.0.0.1:3000"
-        ));
+        
+        // Permitir orígenes según el ambiente (desarrollo y producción)
+        java.util.List<String> allowedOrigins = new java.util.ArrayList<>();
+        
+        // Desarrollo local
+        allowedOrigins.add("http://localhost:5173");
+        allowedOrigins.add("http://localhost:3000");
+        allowedOrigins.add("http://127.0.0.1:5173");
+        allowedOrigins.add("http://127.0.0.1:3000");
+        
+        // Producción - Firebase Hosting
+        allowedOrigins.add("https://pdncineflix.web.app");
+        allowedOrigins.add("https://www.pdncineflix.web.app");
+        
+        configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
-        configuration.setExposedHeaders(Collections.singletonList("*"));
+        configuration.setExposedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
         

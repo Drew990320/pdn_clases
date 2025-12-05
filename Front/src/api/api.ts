@@ -1,20 +1,48 @@
 import axios from 'axios';
 
+// Usar variable de entorno o fallback a dominio de Render
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api-pnd.onrender.com';
+
 export const api = axios.create({
-  baseURL: (import.meta.env.VITE_API_URL ?? 'http://localhost:8080') + '/api',
-  headers: { 'Content-Type': 'application/json' },
+  baseURL: `${API_BASE_URL}/api`,
+  headers: { 
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
   timeout: 10000, // 10 segundos
+  withCredentials: false,
 });
 
-// Interceptor para manejar errores de red
+// Interceptor para manejar errores de red y CORS
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Logging detallado para debug en caso de error
+    console.error('[API Error]', {
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      url: error.config?.url,
+      method: error.config?.method,
+      errorData: error.response?.data,
+      currentOrigin: window.location.origin,
+      message: error.message,
+    });
+
     if (error.code === 'ECONNABORTED') {
       throw new Error('Tiempo de espera agotado. Verifica que el backend esté corriendo.');
     }
+    
     if (error.message === 'Network Error' || !error.response) {
-      throw new Error('Error de conexión. Verifica que el backend esté corriendo en http://localhost:8080');
+      throw new Error(
+        `Error de conexión a ${API_BASE_URL}. ` +
+        'Verifica que el backend esté activo y el dominio sea correcto.'
+      );
+    }
+    
+    // CORS error - revisar configuración en backend
+    if (error.response?.status === 403 || error.response?.status === 401) {
+      console.error('[CORS/Auth Issue] Posible error de CORS o autenticación. ' +
+        'Verifica SecurityConfig.java incluya este origen: ' + window.location.origin);
     }
     
     // Extraer mensaje de error del response del backend
