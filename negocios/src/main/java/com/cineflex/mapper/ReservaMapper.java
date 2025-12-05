@@ -4,6 +4,9 @@ import com.cineflex.dto.reserva.ReservaRequest;
 import com.cineflex.dto.reserva.ReservaResponse;
 import com.cineflex.model.Funcion;
 import com.cineflex.model.Reserva;
+import org.hibernate.LazyInitializationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReservaMapper {
     public static Reserva toEntity(ReservaRequest r, Funcion funcion) {
@@ -20,7 +23,13 @@ public class ReservaMapper {
         res.setId(r.getId());
         res.setNombreCliente(r.getNombreCliente());
         res.setFuncionId(r.getFuncion().getId());
-        res.setAsientos(r.getAsientos());
+        try {
+            List<String> asientos = r.getAsientos();
+            res.setAsientos(asientos != null ? new ArrayList<>(asientos) : List.of());
+        } catch (LazyInitializationException ex) {
+            // Si por alguna razón la colección no pudo inicializarse, devolvemos lista vacía
+            res.setAsientos(List.of());
+        }
         res.setCantidad(r.getCantidad());
         res.setEstado(r.getEstado().name());
         res.setCreatedAt(r.getCreatedAt());
