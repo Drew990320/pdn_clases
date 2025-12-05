@@ -11,6 +11,7 @@ import com.cineflex.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,6 +44,7 @@ public class ReservaController {
     }
 
     @GetMapping
+    @Transactional(readOnly = true)
     public ResponseEntity<List<ReservaResponse>> listar(@RequestParam(required = false) Long funcionId) {
         return ResponseEntity.ok(reservaService.listar(funcionId));
     }
