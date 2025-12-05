@@ -17,7 +17,7 @@ public class Reserva {
     @Column(nullable = false)
     private String nombreCliente;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> asientos = new ArrayList<>();
 
     private Integer cantidad;
