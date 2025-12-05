@@ -9,6 +9,16 @@
         <relativePath/>
     </parent>
 
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+
     <groupId>com.proyecto</groupId>
     <artifactId>negocios</artifactId>
     <version>0.0.1-SNAPSHOT</version>
